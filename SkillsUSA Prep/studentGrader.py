@@ -27,7 +27,7 @@ scores = [int(i) for i in scores]
 
 os.system('cls')
 average(scores)
-print(f"{name} in {className} has an average test score of {averageTestScore}, meaning they have an {letterAverage}\n The highest score was a {highest}")print(f"{name} in {className} has an average test score of {averageTestScore}, meaning they have an {letterAverage}\n The highest score was a {highest}")
+print(f"{name} in {className} has an average test score of {averageTestScore}, meaning they have an {letterAverage}\n The highest score was a {highest}")
 =======
 import math
 
