@@ -14,4 +14,4 @@ print(f"Calories consumed: {calories}")
 print(f"It will take {round(calories/JOGGING, 2)} hours to burn these calories jogging.\nIt will take {round(calories/RUNNING, 2)} to burn these calories by running.")
 
 input()
-os.system('cls')
+os.system('cls') 
