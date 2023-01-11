@@ -15,36 +15,49 @@ titleLabel = ttk.Label(root, text = "Concessions Menu", font = "Arial 24 bold").
 menuLabels = ttk.Label(root, text = "", font = "Arial 24 bold").pack()
 
 class InputFrame:
-    def __init__(self, root, entryInt, outputString):
+    def __init__(self, root, optionString, entryInt, outputString):
         self.inputFrame = ttk.Frame(root)
+        self.optionLabel =  ttk.Label(self.inputFrame, text = optionString)
         self.entry = ttk.Entry(self.inputFrame, textvariable = entryInt)
-        self.button = ttk.Button(self.inputFrame, text = "Convert", command = lambda: addToPrice(entryInt, outputString))
-        self.entry.pack(side = "left", padx = 10)
-        self.button.pack(side = "left")
-        self.inputFrame.pack(pady = 10)
+        self.entry.grid(row=0,column=1,padx=10)
+        self.button = ttk.Button(self.inputFrame, text = "Add", command = lambda: addToPrice(entryInt, outputString))
+        self.button.grid(row=0,column=2,padx=10)
+        self.optionLabel.grid(row=0,column=0,padx=10)
+        self.inputFrame.pack(pady = 5) #Center/align each widget
 
-def addToPrice(entryInt, outputString):
+def addToPrice(entryInt, outputString): #Change the function so that pressing the button adds to the current total price
     try:
         miles = int(entryInt.get())
         outputString.set(miles * 1.61)
     except:
         outputString.set("Error! Whole numbers only")
 
-entryInt1 = tk.IntVar()
-outputString1 = tk.StringVar()
-inputFrame1 = InputFrame(root, entryInt1, outputString1)
+# Creating objects for each menu option
+smallPopcorn = tk.IntVar()
+smallPopcornPrice = tk.StringVar()
+smallPopcornFrame = InputFrame(root, "Small Popcorn", smallPopcorn, smallPopcornPrice)
 
-entryInt2 = tk.IntVar()
-outputString2 = tk.StringVar()
-inputFrame2 = InputFrame(root, entryInt2, outputString2)
+mediumPopcorn = tk.IntVar()
+mediumPopcornPrice = tk.StringVar()
+mediumPopcornFrame = InputFrame(root, "Medium Popcorn", mediumPopcorn, mediumPopcornPrice,)
 
-entryInt3 = tk.IntVar()
-outputString3 = tk.StringVar()
-inputFrame3 = InputFrame(root, entryInt3, outputString3)
+largePopcorn = tk.IntVar()
+largePopcornPrice = tk.StringVar()
+largePopcornFrame = InputFrame(root, "Large Popcorn", largePopcorn, largePopcornPrice)
 
-outputLabel1 = ttk.Label(root, text = "Output 1: ", font = "Arial 24", textvariable = outputString1).pack()
-outputLabel2 = ttk.Label(root, text = "Output 2: ", font = "Arial 24", textvariable = outputString2).pack()
-outputLabel3 = ttk.Label(root, text = "Output 3: ", font = "Arial 24", textvariable = outputString3).pack()
+soda = tk.IntVar()
+sodaPrice = tk.StringVar()
+sodaFrame = InputFrame(root, "Soda", soda, sodaPrice)
+
+candy = tk.IntVar()
+candyPrice = tk.StringVar()
+candyFrame = InputFrame(root, "Candy", candy, candyPrice)
+
+smallPopcornLabel = ttk.Label(root, text = "Output 1: ", font = "Arial 24", textvariable = smallPopcornPrice).pack()
+mediumPopcornLabel = ttk.Label(root, text = "Output 2: ", font = "Arial 24", textvariable = mediumPopcornPrice).pack()
+largePopcornLabel = ttk.Label(root, text = "Output 3: ", font = "Arial 24", textvariable = largePopcornPrice).pack()
+sodaLabel = ttk.Label(root, text = "Output 4: ", font = "Arial 24", textvariable = sodaPrice).pack()
+candyLabel = ttk.Label(root, text = "Output 5: ", font = "Arial 24", textvariable = candyPrice).pack()
 
 # Starts the main loop
 root.mainloop()
