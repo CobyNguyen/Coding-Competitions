@@ -5,59 +5,59 @@ import ttkbootstrap as ttk
 root = ttk.Window(themename = "superhero")
 root.title("Concessions")
 
-# Creating intial options window
-# titleStr = tk.StringVar()
-# titleLabel = ttk.Label(root, text = titleStr, font = "Arial 24 bold").pack()
+# Creating menu dictionary
+menu = {
+    "smallPopcorn": 3.00,
+    "mediumPopcorn": 4.00,
+    "largePopcorn": 5.00,
+    "soda": 2.00,
+    "candy": 1.50
+}
 
 # Creating the menu labels
-# titleStr.set("Concessions Stand")
 titleLabel = ttk.Label(root, text = "Concessions Menu", font = "Arial 24 bold").pack()
 menuLabels = ttk.Label(root, text = "", font = "Arial 24 bold").pack()
 
 class InputFrame:
-    def __init__(self, root, optionString, entryInt, outputString):
+    def __init__(self, root, optionString, amountInt, itemName):
         self.inputFrame = ttk.Frame(root)
         self.optionLabel =  ttk.Label(self.inputFrame, text = optionString)
-        self.entry = ttk.Entry(self.inputFrame, textvariable = entryInt)
-        self.entry.grid(row=0,column=1,padx=10)
-        self.button = ttk.Button(self.inputFrame, text = "Add", command = lambda: addToPrice(entryInt, outputString))
-        self.button.grid(row=0,column=2,padx=10)
+        self.entry = ttk.Entry(self.inputFrame, textvariable = amountInt)
+        self.entry.grid(row=0,column=1)
         self.optionLabel.grid(row=0,column=0,padx=10)
-        self.inputFrame.pack(pady = 5) #Center/align each widget
+        self.inputFrame.pack(pady = 5)
+        self.entry._name = itemName
 
-def addToPrice(entryInt, outputString): #Change the function so that pressing the button adds to the current total price
-    try:
-        miles = int(entryInt.get())
-        outputString.set(miles * 1.61)
-    except:
-        outputString.set("Error! Whole numbers only")
+def checkout():
+    total_cost = 0.0
+    # Iterate over all the input variables and add their values to the total cost
+    for item in menu.keys():
+        total_cost += eval(item).get() * menu[item]
+    totalCostString.set( "${:,.2f}".format(total_cost))
 
 # Creating objects for each menu option
 smallPopcorn = tk.IntVar()
-smallPopcornPrice = tk.StringVar()
-smallPopcornFrame = InputFrame(root, "Small Popcorn", smallPopcorn, smallPopcornPrice)
+smallPopcornFrame = InputFrame(root, "Small Popcorn", smallPopcorn, "smallPopcorn")
 
 mediumPopcorn = tk.IntVar()
-mediumPopcornPrice = tk.StringVar()
-mediumPopcornFrame = InputFrame(root, "Medium Popcorn", mediumPopcorn, mediumPopcornPrice,)
+mediumPopcornFrame = InputFrame(root, "Medium Popcorn", mediumPopcorn, "mediumPopcorn")
 
 largePopcorn = tk.IntVar()
-largePopcornPrice = tk.StringVar()
-largePopcornFrame = InputFrame(root, "Large Popcorn", largePopcorn, largePopcornPrice)
+largePopcornFrame = InputFrame(root, "Large Popcorn", largePopcorn, "largePopcorn")
 
 soda = tk.IntVar()
-sodaPrice = tk.StringVar()
-sodaFrame = InputFrame(root, "Soda", soda, sodaPrice)
+sodaFrame = InputFrame(root, "Soda", soda, "soda")
 
 candy = tk.IntVar()
-candyPrice = tk.StringVar()
-candyFrame = InputFrame(root, "Candy", candy, candyPrice)
+candyFrame = InputFrame(root, "Candy", candy, "candy")
 
-smallPopcornLabel = ttk.Label(root, text = "Output 1: ", font = "Arial 24", textvariable = smallPopcornPrice).pack()
-mediumPopcornLabel = ttk.Label(root, text = "Output 2: ", font = "Arial 24", textvariable = mediumPopcornPrice).pack()
-largePopcornLabel = ttk.Label(root, text = "Output 3: ", font = "Arial 24", textvariable = largePopcornPrice).pack()
-sodaLabel = ttk.Label(root, text = "Output 4: ", font = "Arial 24", textvariable = sodaPrice).pack()
-candyLabel = ttk.Label(root, text = "Output 5: ", font = "Arial 24", textvariable = candyPrice).pack()
+# Create a variable to store the total cost
+totalCostString = tk.StringVar()
+totalCostString.set("")
+
+# Create the checkout button and displays the total cost
+checkoutButton = ttk.Button(root, text = "Checkout", command = checkout).pack()
+totalCostLabel = ttk.Label(root, text = "Total Cost", font = "Arial 24", textvariable = totalCostString).pack()
 
 # Starts the main loop
 root.mainloop()
