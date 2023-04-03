@@ -2,7 +2,7 @@ import csv #imports csv library to enable reading of the csv file.
 import copy #so lists can be duplicated as a complete and individual copy
 #Python is required to run 🗿
 
-with open ("teams.csv", newline = "") as csvfile: #reads the csv file with DictReader and creates a dictionary of the field names (headers)
+with open ("SkillsUSA 2023/State/red_rover_bracket_6587/teams.csv", newline = "") as csvfile: #reads the csv file with DictReader and creates a dictionary of the field names (headers)
     reader = csv.DictReader(csvfile)
     ranks = {row["Team Name"]: int(row["Seeding"]) for row in reader} #creates the keys for each team name and assigns the seed to it in a dictionary
     sorted_seeds = (sorted(ranks.values())) #sorts seed values in a list so they can be used like sorted_seeds[1] and sorted_seeds[-1]
@@ -10,7 +10,7 @@ with open ("teams.csv", newline = "") as csvfile: #reads the csv file with DictR
     if len(ranks) % 2 != 0: #if number of teams
         byes = int((((len(ranks) - 1) ** 2)/ 2) - len(ranks)) #the total number of rounds is always amount of teams ^2, in order for there to be an even amount byes are calculated using this equation
 
-with open ("bracket.txt", "w", encoding = "utf-8") as f: #erases previously existing bracket.txt and adds names and seeds of team
+with open ("SkillsUSA 2023/State/red_rover_bracket_6587/bracket.txt", "w", encoding = "utf-8") as f: #erases previously existing bracket.txt and adds names and seeds of team
     f.write(f"Team Name - Seeding\n{str(ranks).strip('{}')}\n\nTHE CRUSHING 🥵😱👩🏿‍🤝‍👩🏿🤰\n\n")
 
 
@@ -40,8 +40,8 @@ for round_number in range(1, int((len(ranks) + int(byes)) / 2), 1):
     game.append(rounds)
     
 
-    with open ("bracket.txt", "a", encoding = "utf-8") as f: #prints results to text file
+    with open ("SkillsUSA 2023/State/red_rover_bracket_6587/bracket.txt", "a", encoding = "utf-8") as f: #prints results to text file
         f.write(f"Round Number {str(round_number)}\n")
         f.write(str(rounds).strip("[]") + "\n")
-with open ("bracket.txt", "a", encoding = "utf-8") as f: #prints final projected winner
+with open ("SkillsUSA 2023/State/red_rover_bracket_6587/bracket.txt", "a", encoding = "utf-8") as f: #prints final projected winner
     f.write(f"TONIGHT'S BIGGEST WINNER IS ALWAYS SEED 1 🤣😁😊🤩🤩🙂☺🙂🙂🙂😶😪😫🤐🤐☺🙂")
