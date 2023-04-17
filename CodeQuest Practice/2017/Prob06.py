@@ -1,6 +1,7 @@
 cases = int(input())
 
-cipher = {"A":"Alpha",
+cipher = {
+"A":"Alpha",
 "B":"Bravo", 
 "C":"Charlie",
 "D":"Delta",
